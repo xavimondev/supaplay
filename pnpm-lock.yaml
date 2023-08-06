@@ -7,6 +7,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': 6.0.0
   '@typescript-eslint/parser': 6.0.0
   '@vitejs/plugin-react-swc': 3.3.2
+  '@webcontainer/api': 1.1.5
   autoprefixer: 10.4.14
   eslint: 8.45.0
   eslint-config-prettier: 9.0.0
@@ -23,6 +24,7 @@ specifiers:
 
 dependencies:
   '@monaco-editor/react': 4.5.1_ea6y7miz6655r4rwcm3h5eos2i
+  '@webcontainer/api': 1.1.5
   monaco-editor: 0.41.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -682,6 +684,10 @@ packages:
     transitivePeerDependencies:
       - '@swc/helpers'
     dev: true
+
+  /@webcontainer/api/1.1.5:
+    resolution: {integrity: sha512-qMJyqO+A8+B8JKW/IW9KVQblAiEQwesq7ka6w8pgm6DXKWCQaPVOco4Zo7FxZ09OmBIX+lnXyfKbQzXiORLGJg==}
+    dev: false
 
   /acorn-jsx/5.3.2_acorn@8.10.0:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}

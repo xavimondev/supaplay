@@ -6,5 +6,11 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: [{ find: '@', replacement: '/src' }]
+  },
+  server: {
+    headers: {
+      'Cross-Origin-Embedder-Policy': 'require-corp',
+      'Cross-Origin-Opener-Policy': 'same-origin'
+    }
   }
 })
