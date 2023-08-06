@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    @apply bg-gradient-to-tl from-[#0c121b] to-[#030303];
+    @apply bg-[#181818];
   }
 }

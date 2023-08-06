@@ -3,5 +3,5 @@ type HeaderProps = {
 }
 
 export function Header({ children }: HeaderProps) {
-  return <header className='w-full flex justify-between p-4 border-b-gray-500'>{children}</header>
+  return <header className='w-full flex justify-between p-4'>{children}</header>
 }
