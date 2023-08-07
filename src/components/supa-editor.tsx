@@ -34,7 +34,7 @@ export function SupaEditor({ defaultCode, onChangeCode }: SupaEditorProps) {
   return (
     <Editor
       options={{
-        fontSize: 18,
+        fontSize: 17,
         tabSize: 2,
         showDeprecated: true,
         showUnused: true,
