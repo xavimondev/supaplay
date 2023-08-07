@@ -5,11 +5,11 @@ import { Header } from '@/components/header'
 import { Play } from '@/components/icons'
 
 let webcontainerInstance: WebContainer
-const initialCode = `async function getData() { 
-  const { data } = await supabase.from('comments').select()
-  console.log(data);
+const initialCode = `async function main() { 
+
 }
-getData()
+
+main()
 `
 
 function App() {
