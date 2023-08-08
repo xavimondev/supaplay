@@ -21,7 +21,6 @@ export const getIndexContent = (getDataFunction: string) => {
   app.get('/', async (req, res) => {
     try{
       const result = await getData()
-      console.log(result)
       if(result.error) throw new Error('An error has ocurred. Try again 😢')
       const people = JSON.stringify(result.data)
       const html = \`<!DOCTYPE html><html><body><div id='json-viewer'></div><script src='https://cdn.jsdelivr.net/npm/@textea/json-viewer@3'></script><script>new JsonViewer({value:\${people},theme:'dark',rootName:'data'}).render('#json-viewer')</script></body></html>\`
