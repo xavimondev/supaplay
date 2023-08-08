@@ -21,11 +21,11 @@ export const Terminal = ({ output }: TerminalProps) => {
     >
       <div className='w-full text-base p-2 font-mono'>
         {output.length > 0 ? (
-          output.map((line) => {
+          output.map((line, index) => {
             return (
               <p
                 className='text-white'
-                key={`${line}`}
+                key={`${index}`}
                 dangerouslySetInnerHTML={{ __html: line }}
               />
             )
