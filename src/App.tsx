@@ -94,7 +94,7 @@ function App() {
         </div>
       </Header>
       <main className='flex w-full'>
-        <div className='w-full flex flex-col md:flex-row gap-1 border-t border-t-white/10'>
+        <div className='w-full flex flex-col md:flex-row border-t border-t-white/10'>
           <SupaEditor onChangeCode={setCode} defaultCode={code} />
           <div className='w-full flex flex-col justify-between'>
             <div className='flex justify-center items-center p-2 w-full'>
