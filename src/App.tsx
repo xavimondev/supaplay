@@ -9,6 +9,7 @@ import { Header } from '@/components/header'
 import { Play } from '@/components/icons'
 import { Terminal } from '@/components/terminal'
 import { Preview } from '@/components/preview'
+import { Placeholder } from '@/components/placeholder'
 
 const initialCode = `async function getData() { 
 
@@ -24,6 +25,10 @@ function App() {
     src: ''
   })
   const webContainerInstanceRef = useRef<any>(null)
+  const [loadingWebContainer, setLoadingWebContainer] = useState({
+    isBooting: true,
+    isRequesting: false
+  })
 
   useEffect(() => {
     const bootWebContainer = async () => {
@@ -97,10 +102,14 @@ function App() {
   const handleEvaluateTheCode = async () => {
     const codeInput = codeValueRef.current
     await webContainerInstanceRef.current.fs.writeFile('/index.js', getIndexContent(codeInput))
+    setLoadingWebContainer({
+      ...loadingWebContainer,
+      isRequesting: true
+    })
   }
 
   return (
-    <div className='w-full flex flex-col'>
+    <div className='w-full flex flex-col min-h-screen'>
       <Header>
         <div className='flex gap-2'>
           <button
@@ -114,12 +123,14 @@ function App() {
           </button>
         </div>
       </Header>
-      <main className='flex w-full'>
+      <main className='flex w-full h-[calc(100vh-68px)]'>
         <div className='w-full flex flex-col md:flex-row border-t border-t-white/10'>
           <SupaEditor onChangeCode={setCode} defaultCode={codeValueRef.current} />
           <div className='w-full flex flex-col justify-between'>
-            <div className='flex justify-center items-center p-2 w-full'>
-              <Preview linkData={linkData} />
+            <div className='flex flex-col justify-center items-center p-2 w-full h-full'>
+              {loadingWebContainer.isBooting && <Placeholder msg='Booting WebContainer' />}
+              {loadingWebContainer.isRequesting && <Placeholder msg='Running your query' />}
+              <Preview linkData={linkData} setIsLoadingComponent={setLoadingWebContainer} />
             </div>
             <Terminal output={output} />
           </div>
