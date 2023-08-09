@@ -45,7 +45,7 @@ export function SupaEditor({ defaultCode, onChangeCode }: SupaEditorProps) {
         }
       }}
       onChange={(value) => onChangeCode(value as string)}
-      height='100vh'
+      height='100%'
       defaultLanguage='typescript'
       defaultValue={defaultCode}
       theme='vs-dark'
