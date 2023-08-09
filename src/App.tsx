@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { WebContainer } from '@webcontainer/api'
 import ANSIToHTML from 'ansi-to-html'
 import { LinkData } from '@/types'
-import { PACKAGE_JSON_CONTENT } from '@/constants'
+import { HELPERS_CONTENT, PACKAGE_JSON_CONTENT } from '@/constants'
 import { getIndexContent } from '@/helpers/getIndexContent'
 import { SupaEditor } from '@/components/supa-editor'
 import { Header } from '@/components/header'
@@ -41,6 +41,11 @@ function App() {
         'index.js': {
           file: {
             contents: `${getIndexContent(initialCode)}`
+          }
+        },
+        'helpers.js': {
+          file: {
+            contents: HELPERS_CONTENT
           }
         },
         'package.json': {

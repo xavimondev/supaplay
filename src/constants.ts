@@ -12,3 +12,9 @@ export const PACKAGE_JSON_CONTENT = `
     }
   }
 `.trim()
+
+export const HELPERS_CONTENT = `
+  export function getFrameContent(data) {
+    return \`<!DOCTYPE html><html><body><div id='json-viewer'></div><script src='https://cdn.jsdelivr.net/npm/@textea/json-viewer@3'></script><script>new JsonViewer({value:\${data},theme:'dark',rootName:'data'}).render('#json-viewer')</script></body></html>\`
+  }
+`
