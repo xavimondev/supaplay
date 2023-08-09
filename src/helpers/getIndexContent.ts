@@ -2,7 +2,7 @@ export const getIndexContent = (getDataFunction: string) => {
   return `
   import express from 'express'
   import { createClient } from '@supabase/supabase-js'
-  
+
   const app = express()
   const port = 3111
 
@@ -21,19 +21,20 @@ export const getIndexContent = (getDataFunction: string) => {
   app.get('/', async (req, res) => {
     try{
       const result = await getData()
+      if(!result) return res.send('<main style="width:100%;height:100vh;display:flex;justify-content:center;align-items:center;"><div style="color:rgba(255,255,255,0.5);font-size:32px;font-family:sans-serif;"><p>Nothing has happened yet</p></div></main>')
       if(result.error) throw new Error('An error has ocurred. Try again 😢')
       const people = JSON.stringify(result.data)
       const html = \`<!DOCTYPE html><html><body><div id='json-viewer'></div><script src='https://cdn.jsdelivr.net/npm/@textea/json-viewer@3'></script><script>new JsonViewer({value:\${people},theme:'dark',rootName:'data'}).render('#json-viewer')</script></body></html>\`
-      res.send(html)
+      return res.send(html)
     }catch(error){
-      const html = \`<h1>\${error.message}</h1>\`
-      res.send(html)
       console.error(error)
+      const html = \`<h1>\${error.message}</h1>\`
+      return res.send(html)
     }
   })
 
   app.listen(port, () => {
-    console.log(\`App is live at http://localhost:\${port}\`);
+    console.log(\`App is live at http://localhost:\${port}\`)
   })
 `
 }

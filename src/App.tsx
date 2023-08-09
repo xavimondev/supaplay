@@ -1,14 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { WebContainer } from '@webcontainer/api'
 import ANSIToHTML from 'ansi-to-html'
+import { LinkData } from '@/types'
 import { PACKAGE_JSON_CONTENT } from '@/constants'
 import { getIndexContent } from '@/helpers/getIndexContent'
 import { SupaEditor } from '@/components/supa-editor'
 import { Header } from '@/components/header'
 import { Play } from '@/components/icons'
 import { Terminal } from '@/components/terminal'
+import { Preview } from '@/components/preview'
 
-let webcontainerInstance: WebContainer
 const initialCode = `async function getData() { 
 
 }
@@ -16,66 +17,86 @@ const initialCode = `async function getData() {
 const ANSIConverter = new ANSIToHTML()
 
 function App() {
-  const [code, setCode] = useState(initialCode)
+  const codeValueRef = useRef(initialCode)
   const [output, setOutput] = useState<string[]>([])
-  const [link, setLink] = useState('')
+  const [linkData, setLinkData] = useState<LinkData>({
+    uuid: '',
+    src: ''
+  })
+  const webContainerInstanceRef = useRef<any>(null)
+
+  useEffect(() => {
+    const bootWebContainer = async () => {
+      if (!webContainerInstanceRef.current) {
+        webContainerInstanceRef.current = await WebContainer.boot()
+      }
+
+      // mounting tree of files into filesystem
+      await webContainerInstanceRef.current.mount({
+        'index.js': {
+          file: {
+            contents: `${getIndexContent(initialCode)}`
+          }
+        },
+        'package.json': {
+          file: {
+            contents: PACKAGE_JSON_CONTENT
+          }
+        }
+      })
+      // installing dependencies
+      const install = await webContainerInstanceRef.current.spawn('npm', ['install'])
+      setOutput(['Installing dependencies...'])
+      install.output.pipeTo(
+        new WritableStream({
+          write(data) {
+            try {
+              setOutput((state) => [...state, ANSIConverter.toHtml(data)])
+            } catch (error) {
+              console.error(error)
+            }
+          }
+        })
+      )
+
+      const exitCode = await install.exit
+      if (exitCode !== 0) {
+        throw new Error('Installation failed')
+      }
+
+      // running server
+      const start = await webContainerInstanceRef.current.spawn('npm', ['run', 'start'])
+      start.output.pipeTo(
+        new WritableStream({
+          write(data) {
+            try {
+              setOutput((state) => [...state, ANSIConverter.toHtml(data)])
+            } catch (error) {
+              console.log(error)
+            }
+          }
+        })
+      )
+
+      // listening for events
+      webContainerInstanceRef.current.on('server-ready', (_: any, url: any) => {
+        setLinkData({
+          src: url,
+          uuid: crypto.randomUUID()
+        })
+      })
+    }
+
+    bootWebContainer()
+  }, [])
+
+  const setCode = (code: string) => {
+    codeValueRef.current = code
+  }
 
   const handleEvaluateTheCode = async () => {
-    if (!webcontainerInstance) {
-      webcontainerInstance = await WebContainer.boot()
-    }
-
-    await webcontainerInstance.mount({
-      'index.js': {
-        file: {
-          contents: `${getIndexContent(code)}`
-        }
-      },
-      'package.json': {
-        file: {
-          contents: PACKAGE_JSON_CONTENT
-        }
-      }
-    })
-
-    const install = await webcontainerInstance.spawn('npm', ['install'])
-
-    setOutput(['Installing dependencies...'])
-    install.output.pipeTo(
-      new WritableStream({
-        write(data) {
-          try {
-            setOutput((state) => [...state, ANSIConverter.toHtml(data)])
-          } catch (error) {
-            console.error(error)
-          }
-        }
-      })
-    )
-
-    const exitCode = await install.exit
-    if (exitCode !== 0) {
-      throw new Error('Installation failed')
-    }
-
-    const start = await webcontainerInstance.spawn('npm', ['run', 'start'])
-    // showing running process
-    start.output.pipeTo(
-      new WritableStream({
-        write(data) {
-          try {
-            setOutput((state) => [...state, ANSIConverter.toHtml(data)])
-          } catch (error) {
-            console.log(error)
-          }
-        }
-      })
-    )
-
-    webcontainerInstance.on('server-ready', (_, url) => {
-      console.log(`Go to this URL ${url}`)
-      setLink(url)
-    })
+    const codeInput = codeValueRef.current
+    await webContainerInstanceRef.current.fs.writeFile('/index.js', getIndexContent(codeInput))
   }
 
   return (
@@ -95,10 +116,10 @@ function App() {
       </Header>
       <main className='flex w-full'>
         <div className='w-full flex flex-col md:flex-row border-t border-t-white/10'>
-          <SupaEditor onChangeCode={setCode} defaultCode={code} />
+          <SupaEditor onChangeCode={setCode} defaultCode={codeValueRef.current} />
           <div className='w-full flex flex-col justify-between'>
             <div className='flex justify-center items-center p-2 w-full'>
-              <iframe src={link} width='100%' height='100%'></iframe>
+              <Preview linkData={linkData} />
             </div>
             <Terminal output={output} />
           </div>

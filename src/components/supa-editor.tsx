@@ -3,7 +3,7 @@ import { constrainedEditor } from 'constrained-editor-plugin'
 
 type SupaEditorProps = {
   defaultCode: string
-  onChangeCode: React.Dispatch<React.SetStateAction<string>>
+  onChangeCode: (code: string) => void
 }
 
 export function SupaEditor({ defaultCode, onChangeCode }: SupaEditorProps) {
