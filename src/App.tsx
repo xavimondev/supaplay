@@ -24,7 +24,7 @@ function App() {
     uuid: '',
     src: ''
   })
-  const webContainerInstanceRef = useRef<any>(null)
+  const webContainerInstanceRef = useRef<WebContainer | null>(null)
   const [loadingWebContainer, setLoadingWebContainer] = useState({
     isBooting: true,
     isRequesting: false
@@ -101,7 +101,7 @@ function App() {
 
   const handleEvaluateTheCode = async () => {
     const codeInput = codeValueRef.current
-    await webContainerInstanceRef.current.fs.writeFile('/index.js', getIndexContent(codeInput))
+    await webContainerInstanceRef.current?.fs.writeFile('/index.js', getIndexContent(codeInput))
     setLoadingWebContainer({
       ...loadingWebContainer,
       isRequesting: true
