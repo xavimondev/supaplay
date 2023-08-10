@@ -16,11 +16,14 @@ export const Terminal = ({ output }: TerminalProps) => {
 
   return (
     <div className='border-t border-t-white/10 bg-black'>
-      <div className='w-full flex justify-between items-center text-gray-300 p-2'>
+      <div
+        className='w-full flex justify-between items-center text-gray-300 p-2 cursor-pointer'
+        onClick={() => setIsOpen(!isOpen)}
+      >
         <span className='text-xs'>Terminal</span>
-        <button onClick={() => setIsOpen(!isOpen)}>
+        <div>
           <TerminalIc className='h-4 w-4' />
-        </button>
+        </div>
       </div>
       {isOpen && (
         <div
