@@ -1,4 +1,5 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react'
+import { useLocation } from 'wouter'
 import { Credentials } from '@/types'
 
 type CredentialsContext = {
@@ -25,10 +26,23 @@ export function CredentialsProvider({ children }: CredentialsProviderProps) {
     const storedCredentials = localStorage.getItem('supaplay-keys')
     return storedCredentials ? JSON.parse(storedCredentials) : initialState
   })
+  const [location, setLocation] = useLocation()
 
   useEffect(() => {
     localStorage.setItem('supaplay-keys', JSON.stringify(credentials))
   }, [credentials])
+
+  useEffect(() => {
+    const { serviceKey, urlProject } = credentials
+    const hasCredentials = serviceKey !== '' && urlProject !== ''
+
+    if (!hasCredentials) {
+      setLocation('/')
+      return
+    }
+
+    if (location === '/' && hasCredentials) setLocation('/play')
+  }, [])
 
   return (
     <CredentialsContext.Provider
