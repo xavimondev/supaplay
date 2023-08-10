@@ -1,6 +1,22 @@
-export function FormCredentials() {
+import { Credentials } from '@/types'
+
+type FormCredentialsProps = {
+  onSubmit: (credentials: Credentials) => void
+}
+
+export function FormCredentials({ onSubmit }: FormCredentialsProps) {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = Object.fromEntries(new FormData(e.currentTarget))
+    const { projecturl, servicekey } = formData
+    onSubmit({
+      urlProject: projecturl as string,
+      serviceKey: servicekey as string
+    })
+  }
+
   return (
-    <form className='flex flex-col gap-5'>
+    <form className='flex flex-col gap-5' onSubmit={handleSubmit}>
       <div className='w-full flex flex-col gap-1.5'>
         <label htmlFor='projecturl' className='text-white text-sm font-medium uppercase'>
           Url
@@ -25,7 +41,7 @@ export function FormCredentials() {
       </div>
       <div className='flex justify-end'>
         <button
-          type='button'
+          type='submit'
           className='gap-1.5 px-4 py-2 rounded-md bg-green-400/80 hover:bg-green-600 transition-colors ease-in-out text-sm text-white focus:ring-2 focus:ring-green-400/80 focus:outline-none'
         >
           Enter

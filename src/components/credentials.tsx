@@ -1,6 +1,12 @@
+import { useLocation } from 'wouter'
+import { Credentials } from '@/types'
+import { useCredentials } from '@/context/CredentialsProvider'
 import { FormCredentials } from '@/components/form-credentials'
 
 export function Credentials() {
+  const [, setLocation] = useLocation()
+  const { setCredentials } = useCredentials()
+
   return (
     <div className='min-h-screen flex justify-center items-center'>
       <div className='flex flex-col rounded-md border border-white/10 shadow p-5 mx-3 sm:m-0 w-full sm:w-[550px] selection:bg-green-400 selection:text-black'>
@@ -23,7 +29,14 @@ export function Credentials() {
             <li>Under Project API Keys, copy your service_role</li>
           </ol>
           <div className='w-full mt-3'>
-            <FormCredentials />
+            <FormCredentials
+              onSubmit={(credentials: Credentials) => {
+                setCredentials(credentials)
+                setLocation('/play')
+                // Save the data to localstorage
+                localStorage.setItem('supaplay-keys', JSON.stringify(credentials))
+              }}
+            />
           </div>
         </div>
       </div>
