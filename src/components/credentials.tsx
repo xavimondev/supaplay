@@ -33,8 +33,6 @@ export function Credentials() {
               onSubmit={(credentials: Credentials) => {
                 setCredentials(credentials)
                 setLocation('/play')
-                // Save the data to localstorage
-                localStorage.setItem('supaplay-keys', JSON.stringify(credentials))
               }}
             />
           </div>
