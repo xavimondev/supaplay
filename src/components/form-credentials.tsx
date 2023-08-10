@@ -1,4 +1,5 @@
 import { Credentials } from '@/types'
+import { isFormValid } from '@/helpers/validateForm'
 
 type FormCredentialsProps = {
   onSubmit: (credentials: Credentials) => void
@@ -9,10 +10,13 @@ export function FormCredentials({ onSubmit }: FormCredentialsProps) {
     e.preventDefault()
     const formData = Object.fromEntries(new FormData(e.currentTarget))
     const { projecturl, servicekey } = formData
-    onSubmit({
-      urlProject: projecturl as string,
-      serviceKey: servicekey as string
-    })
+    const urlProject = projecturl as string
+    const serviceKey = servicekey as string
+    const data = { urlProject, serviceKey }
+    if (!isFormValid(data)) {
+      return
+    }
+    onSubmit(data)
   }
 
   return (
