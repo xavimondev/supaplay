@@ -1,21 +1,11 @@
 export const getIndexContent = (getDataFunction: string) => {
   return `
   import express from 'express'
-  import { createClient } from '@supabase/supabase-js'
+  import { supabase } from './supabase.js'
   import { getFrameContent } from './helpers.js'
 
   const app = express()
   const port = 3111
-
-  // Create a single supabase client for interacting with your database
-  const supabase = createClient('https://ifqnvmhhabkpzxylyfmd.supabase.co', 
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmcW52bWhoYWJrcHp4eWx5Zm1kIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTEyNTA4MDcsImV4cCI6MjAwNjgyNjgwN30.SpP4oMZN8bgbV8tUrWqhf-Y0eXd9M3UzyP7hhnjX6GA',
-  {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false
-    }
-  })
 
   ${getDataFunction}
 

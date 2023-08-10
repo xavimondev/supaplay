@@ -2,7 +2,12 @@ import { useEffect, useState, useRef } from 'react'
 import { WebContainer } from '@webcontainer/api'
 import ANSIToHTML from 'ansi-to-html'
 import { LinkData } from '@/types'
-import { CODE_EDITOR_DEFAULT, HELPERS_CONTENT, PACKAGE_JSON_CONTENT } from '@/constants'
+import {
+  CODE_EDITOR_DEFAULT,
+  HELPERS_CONTENT,
+  PACKAGE_JSON_CONTENT,
+  SUPABASE_CONTENT
+} from '@/constants'
 import { getIndexContent } from '@/helpers/getIndexContent'
 
 const ansiConverter = new ANSIToHTML()
@@ -31,6 +36,11 @@ export function useWebContainer() {
         'helpers.js': {
           file: {
             contents: HELPERS_CONTENT
+          }
+        },
+        'supabase.js': {
+          file: {
+            contents: SUPABASE_CONTENT
           }
         },
         'package.json': {
