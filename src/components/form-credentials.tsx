@@ -34,7 +34,7 @@ export function FormCredentials({ onSubmit }: FormCredentialsProps) {
       </div>
       <div className='w-full flex flex-col gap-1.5'>
         <label htmlFor='servicekey' className='text-white text-sm font-medium uppercase'>
-          API Keys
+          Service Role Key
         </label>
         <input
           type='text'
