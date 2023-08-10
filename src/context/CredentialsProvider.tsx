@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useState } from 'react'
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react'
 import { Credentials } from '@/types'
 
 type CredentialsContext = {
@@ -25,6 +25,10 @@ export function CredentialsProvider({ children }: CredentialsProviderProps) {
     const storedCredentials = localStorage.getItem('supaplay-keys')
     return storedCredentials ? JSON.parse(storedCredentials) : initialState
   })
+
+  useEffect(() => {
+    localStorage.setItem('supaplay-keys', JSON.stringify(credentials))
+  }, [credentials])
 
   return (
     <CredentialsContext.Provider

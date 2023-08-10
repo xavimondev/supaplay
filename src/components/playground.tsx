@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react'
 import { CODE_EDITOR_DEFAULT } from '@/constants'
+import { Credentials } from '@/types'
 import { getIndexContent } from '@/helpers/getIndexContent'
 import { useWebContainer } from '@/hooks/useWebContainer'
+import { useCredentials } from '@/context/CredentialsProvider'
 import { SupaEditor } from '@/components/supa-editor'
 import { Header } from '@/components/header'
 import { GearIc, Play } from '@/components/icons'
@@ -18,6 +20,7 @@ export function Playground() {
     isRequesting: false
   })
   const { linkData, output, webContainerInstanceRef } = useWebContainer()
+  const { setCredentials } = useCredentials()
 
   const setCode = (code: string) => {
     codeValueRef.current = code
@@ -49,7 +52,11 @@ export function Playground() {
               </button>
             }
           >
-            <FormCredentials />
+            <FormCredentials
+              onSubmit={(credentials: Credentials) => {
+                setCredentials(credentials)
+              }}
+            />
           </Dialog>
           <button
             type='button'
