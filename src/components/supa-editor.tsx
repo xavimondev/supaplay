@@ -42,7 +42,8 @@ export function SupaEditor({ defaultCode, onChangeCode }: SupaEditorProps) {
         wordWrapColumn: 80,
         minimap: {
           enabled: false
-        }
+        },
+        contextmenu: false
       }}
       onChange={(value) => onChangeCode(value as string)}
       height='100%'
