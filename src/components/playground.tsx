@@ -6,10 +6,12 @@ import { HELPERS_CONTENT, PACKAGE_JSON_CONTENT } from '@/constants'
 import { getIndexContent } from '@/helpers/getIndexContent'
 import { SupaEditor } from '@/components/supa-editor'
 import { Header } from '@/components/header'
-import { Play } from '@/components/icons'
+import { GearIc, Play } from '@/components/icons'
 import { Terminal } from '@/components/terminal'
 import { Preview } from '@/components/preview'
 import { Placeholder } from '@/components/placeholder'
+import { Dialog } from '@/components/dialog'
+import { FormCredentials } from '@/components/form-credentials'
 
 const initialCode = `async function getData() { 
 
@@ -117,6 +119,21 @@ export function Playground() {
     <div className='w-full flex flex-col min-h-screen'>
       <Header>
         <div className='flex gap-2'>
+          <Dialog
+            title='Setting Up Credentiales'
+            btnOpen={
+              <button
+                type='button'
+                className='flex items-center gap-1.5 p-2 rounded-md bg-neutral-700/50 hover:bg-neutral-700/70 transition-colors ease-in-out 
+            text-sm text-white border border-neutral-700 hover:border-neutral-500'
+              >
+                <GearIc className='w-4 h-4' />
+                Settings
+              </button>
+            }
+          >
+            <FormCredentials />
+          </Dialog>
           <button
             type='button'
             onClick={handleEvaluateTheCode}
