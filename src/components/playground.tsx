@@ -1,9 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
-import { WebContainer } from '@webcontainer/api'
-import ANSIToHTML from 'ansi-to-html'
-import { LinkData } from '@/types'
-import { HELPERS_CONTENT, PACKAGE_JSON_CONTENT } from '@/constants'
+import { useRef, useState } from 'react'
+import { CODE_EDITOR_DEFAULT } from '@/constants'
 import { getIndexContent } from '@/helpers/getIndexContent'
+import { useWebContainer } from '@/hooks/useWebContainer'
 import { SupaEditor } from '@/components/supa-editor'
 import { Header } from '@/components/header'
 import { GearIc, Play } from '@/components/icons'
@@ -13,94 +11,13 @@ import { Placeholder } from '@/components/placeholder'
 import { Dialog } from '@/components/dialog'
 import { FormCredentials } from '@/components/form-credentials'
 
-const initialCode = `async function getData() { 
-
-}
-`
-const ANSIConverter = new ANSIToHTML()
-
 export function Playground() {
-  const codeValueRef = useRef(initialCode)
-  const [output, setOutput] = useState<string[]>([])
-  const [linkData, setLinkData] = useState<LinkData>({
-    uuid: '',
-    src: ''
-  })
-  const webContainerInstanceRef = useRef<WebContainer | null>(null)
+  const codeValueRef = useRef(CODE_EDITOR_DEFAULT)
   const [loadingWebContainer, setLoadingWebContainer] = useState({
     isBooting: true,
     isRequesting: false
   })
-
-  useEffect(() => {
-    const bootWebContainer = async () => {
-      if (!webContainerInstanceRef.current) {
-        webContainerInstanceRef.current = await WebContainer.boot()
-      }
-
-      // mounting tree of files into filesystem
-      await webContainerInstanceRef.current.mount({
-        'index.js': {
-          file: {
-            contents: `${getIndexContent(initialCode)}`
-          }
-        },
-        'helpers.js': {
-          file: {
-            contents: HELPERS_CONTENT
-          }
-        },
-        'package.json': {
-          file: {
-            contents: PACKAGE_JSON_CONTENT
-          }
-        }
-      })
-      // installing dependencies
-      const install = await webContainerInstanceRef.current.spawn('npm', ['install'])
-      setOutput(['Installing dependencies...'])
-      install.output.pipeTo(
-        new WritableStream({
-          write(data) {
-            try {
-              setOutput((state) => [...state, ANSIConverter.toHtml(data)])
-            } catch (error) {
-              console.error(error)
-            }
-          }
-        })
-      )
-
-      const exitCode = await install.exit
-      if (exitCode !== 0) {
-        throw new Error('Installation failed')
-      }
-
-      // running server
-      const start = await webContainerInstanceRef.current.spawn('npm', ['run', 'start'])
-      start.output.pipeTo(
-        new WritableStream({
-          write(data) {
-            try {
-              setOutput((state) => [...state, ANSIConverter.toHtml(data)])
-            } catch (error) {
-              console.log(error)
-            }
-          }
-        })
-      )
-
-      // listening for events
-      webContainerInstanceRef.current.on('server-ready', (_: any, url: any) => {
-        setLinkData({
-          src: url,
-          uuid: crypto.randomUUID()
-        })
-      })
-    }
-
-    bootWebContainer()
-  }, [])
+  const { linkData, output, webContainerInstanceRef } = useWebContainer()
 
   const setCode = (code: string) => {
     codeValueRef.current = code

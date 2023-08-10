@@ -18,3 +18,8 @@ export const HELPERS_CONTENT = `
     return \`<!DOCTYPE html><html><body><div id='json-viewer'></div><script src='https://cdn.jsdelivr.net/npm/@textea/json-viewer@3'></script><script>new JsonViewer({value:\${data},theme:'dark',rootName:'data'}).render('#json-viewer')</script></body></html>\`
   }
 `
+
+export const CODE_EDITOR_DEFAULT = `async function getData() { 
+
+}
+`
