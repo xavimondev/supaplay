@@ -44,7 +44,7 @@ export const Terminal = ({ output }: TerminalProps) => {
                 )
               })
             ) : (
-              <span className='text-zinc-400'>Click on run to evaluate the code.</span>
+              <span className='text-zinc-400'>Setting up terminal...</span>
             )}
           </div>
         </div>
