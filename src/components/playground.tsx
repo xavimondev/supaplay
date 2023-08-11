@@ -1,8 +1,7 @@
 import { useRef, useState } from 'react'
 import { CODE_EDITOR_DEFAULT } from '@/constants'
 import { Credentials } from '@/types'
-import { getIndexContent } from '@/helpers/getIndexContent'
-import { getSupabaseFileContent } from '@/helpers/webcontainer'
+import { getServicesFileContent, getSupabaseFileContent } from '@/helpers/webcontainer'
 import { useWebContainer } from '@/hooks/useWebContainer'
 import { useCredentials } from '@/context/CredentialsProvider'
 import { SupaEditor } from '@/components/supa-editor'
@@ -29,7 +28,12 @@ export function Playground() {
 
   const handleEvaluateTheCode = async () => {
     const codeInput = codeValueRef.current
-    await webContainerInstanceRef.current?.fs.writeFile('/index.js', getIndexContent(codeInput))
+    await webContainerInstanceRef.current?.fs.writeFile(
+      '/services.js',
+      getServicesFileContent({
+        mainFunction: codeInput
+      })
+    )
     setLoadingWebContainer({
       ...loadingWebContainer,
       isRequesting: true

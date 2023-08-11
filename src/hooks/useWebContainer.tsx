@@ -2,9 +2,14 @@ import { useEffect, useState, useRef } from 'react'
 import { WebContainer } from '@webcontainer/api'
 import ANSIToHTML from 'ansi-to-html'
 import { LinkData } from '@/types'
-import { CODE_EDITOR_DEFAULT, HELPERS_CONTENT, PACKAGE_JSON_CONTENT } from '@/constants'
-import { getIndexContent } from '@/helpers/getIndexContent'
-import { getSupabaseFileContent } from '@/helpers/webcontainer'
+import { CODE_EDITOR_DEFAULT, PACKAGE_JSON_CONTENT } from '@/constants'
+import {
+  getHelpersFileContent,
+  getIndexFileContent,
+  getServicesFileContent,
+  getSupabaseFileContent
+} from '@/helpers/webcontainer'
+import { getMainIFrameContent, removeBreaklineAndSpace } from '@/helpers/iframe'
 import { useCredentials } from '@/context/CredentialsProvider'
 
 const ansiConverter = new ANSIToHTML()
@@ -24,21 +29,29 @@ export function useWebContainer() {
         webContainerInstanceRef.current = await WebContainer.boot()
       }
 
+      const mainIndexContent = removeBreaklineAndSpace(getMainIFrameContent())
       // mounting tree of files into filesystem
       await webContainerInstanceRef.current.mount({
         'index.js': {
           file: {
-            contents: `${getIndexContent(CODE_EDITOR_DEFAULT)}`
+            contents: getIndexFileContent({
+              mainIndexContent
+            })
           }
         },
         'helpers.js': {
           file: {
-            contents: HELPERS_CONTENT
+            contents: getHelpersFileContent()
           }
         },
         'supabase.js': {
           file: {
             contents: getSupabaseFileContent({ ...credentials })
+          }
+        },
+        'services.js': {
+          file: {
+            contents: getServicesFileContent({ mainFunction: CODE_EDITOR_DEFAULT })
           }
         },
         'package.json': {
