@@ -37,7 +37,7 @@ export function FormCredentials({ onSubmit }: FormCredentialsProps) {
           Service Role Key
         </label>
         <input
-          type='text'
+          type='password'
           name='servicekey'
           placeholder='Your service key'
           className='w-full px-4 py-2 bg-black/30 text-white text-sm sm:text-base placeholder-white/30 rounded-md focus:ring-2 focus:ring-green-400/80 focus:outline-none'
