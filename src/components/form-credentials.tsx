@@ -46,7 +46,7 @@ export function FormCredentials({ onSubmit }: FormCredentialsProps) {
       <div className='flex justify-end'>
         <button
           type='submit'
-          className='gap-1.5 px-4 py-2 rounded-md bg-green-400/80 hover:bg-green-600 transition-colors ease-in-out text-sm text-white focus:ring-2 focus:ring-green-400/80 focus:outline-none'
+          className='gap-1.5 px-4 py-1.5 rounded-md bg-green-400/80 hover:bg-green-600 transition-colors ease-in-out text-sm text-white focus:ring-2 focus:ring-green-400/80 focus:outline-none'
         >
           Enter
         </button>

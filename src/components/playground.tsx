@@ -49,7 +49,7 @@ export function Playground() {
             btnOpen={
               <button
                 type='button'
-                className='flex items-center gap-1.5 p-2 rounded-md bg-neutral-700/50 hover:bg-neutral-700/70 transition-colors ease-in-out 
+                className='flex items-center gap-1.5 p-1.5 rounded-md bg-neutral-700/50 hover:bg-neutral-700/70 transition-colors ease-in-out 
             text-sm text-white border border-neutral-700 hover:border-neutral-500'
               >
                 <GearIc className='w-4 h-4' />
@@ -70,7 +70,7 @@ export function Playground() {
           <button
             type='button'
             onClick={handleEvaluateTheCode}
-            className='flex items-center gap-1.5 p-2 rounded-md bg-green-400/80 hover:bg-green-600 transition-colors ease-in-out 
+            className='flex items-center gap-1.5 p-1.5 rounded-md bg-green-400/80 hover:bg-green-600 transition-colors ease-in-out 
             text-sm text-white'
           >
             <Play className='w-4 h-4' />
@@ -84,7 +84,7 @@ export function Playground() {
           <div className='w-full flex flex-col justify-between'>
             <div className='flex flex-col justify-center items-center p-2 w-full h-full'>
               {loadingWebContainer.isBooting && <Placeholder msg='Booting WebContainer' />}
-              {loadingWebContainer.isRequesting && <Placeholder msg='Running your query' />}
+              {/* {loadingWebContainer.isRequesting && <Placeholder msg='Running your query' />} */}
               <Preview linkData={linkData} setIsLoadingComponent={setLoadingWebContainer} />
             </div>
             <Terminal output={output} />
