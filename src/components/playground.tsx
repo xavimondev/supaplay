@@ -12,6 +12,7 @@ import { Preview } from '@/components/preview'
 import { Placeholder } from '@/components/placeholder'
 import { Dialog } from '@/components/dialog'
 import { FormCredentials } from '@/components/form-credentials'
+import { LoadingSpin } from '@/components/loading'
 
 export function Playground() {
   const codeValueRef = useRef(CODE_EDITOR_DEFAULT)
@@ -69,22 +70,31 @@ export function Playground() {
           </Dialog>
           <button
             type='button'
+            disabled={loadingWebContainer.isRequesting}
             onClick={handleEvaluateTheCode}
             className='flex items-center gap-1.5 p-1.5 rounded-md bg-green-400/80 hover:bg-green-600 transition-colors ease-in-out 
-            text-sm text-white'
+            text-sm text-white disabled:cursor-not-allowed disabled:bg-green-600'
           >
-            <Play className='w-4 h-4' />
-            Run Code
+            {loadingWebContainer.isRequesting ? (
+              <>
+                <LoadingSpin />
+                Running Code
+              </>
+            ) : (
+              <>
+                <Play className='w-4 h-4' />
+                Run Code
+              </>
+            )}
           </button>
         </div>
       </Header>
       <main className='flex w-full h-[calc(100vh-68px)]'>
-        <div className='w-full flex flex-col md:flex-row border-t border-t-white/10'>
+        <div className='w-full flex flex-col md:flex-row'>
           <SupaEditor onChangeCode={setCode} defaultCode={codeValueRef.current} />
           <div className='w-full flex flex-col justify-between'>
             <div className='flex flex-col justify-center items-center p-2 w-full h-full'>
               {loadingWebContainer.isBooting && <Placeholder msg='Booting WebContainer' />}
-              {/* {loadingWebContainer.isRequesting && <Placeholder msg='Running your query' />} */}
               <Preview linkData={linkData} setIsLoadingComponent={setLoadingWebContainer} />
             </div>
             <Terminal output={output} />
