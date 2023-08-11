@@ -21,7 +21,7 @@ export function useWebContainer() {
     src: ''
   })
   const webContainerInstanceRef = useRef<WebContainer | null>(null)
-  const { credentials } = useCredentials()
+  const { credentials, defaultTable } = useCredentials()
 
   useEffect(() => {
     const bootWebContainer = async () => {
@@ -29,7 +29,7 @@ export function useWebContainer() {
         webContainerInstanceRef.current = await WebContainer.boot()
       }
 
-      const mainIndexContent = removeBreaklineAndSpace(getMainIFrameContent())
+      const mainIndexContent = removeBreaklineAndSpace(getMainIFrameContent(defaultTable))
       // mounting tree of files into filesystem
       await webContainerInstanceRef.current.mount({
         'index.js': {
