@@ -1,3 +1,5 @@
+import { getMainIFrameContent, removeBreaklineAndSpace } from '@/helpers/iframe'
+
 export const getIndexContent = (getDataFunction: string) => {
   return `
   import express from 'express'
@@ -14,7 +16,7 @@ export const getIndexContent = (getDataFunction: string) => {
       const result = await getData()
       let html = ''
       if(!result) {
-        return res.send('<main style="width:100%;height:100%;display:flex;justify-content:center;align-items:center;"><div style="color:rgba(255,255,255,0.5);font-size:32px;font-family:sans-serif;"><p>Nothing has happened yet</p></div></main>')
+        return res.send('${removeBreaklineAndSpace(getMainIFrameContent())}')
       }
       if(result.error) {
         html = getFrameContent(JSON.stringify(result.error))
