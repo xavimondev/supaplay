@@ -23,15 +23,3 @@ export const CODE_EDITOR_DEFAULT = `async function getData() {
 
 }
 `
-
-export const SUPABASE_CONTENT = `
-  import { createClient } from '@supabase/supabase-js'
-  export const supabase = createClient('https://ifqnvmhhabkpzxylyfmd.supabase.co', 
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmcW52bWhoYWJrcHp4eWx5Zm1kIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5MTI1MDgwNywiZXhwIjoyMDA2ODI2ODA3fQ.9rcB_kwf0GupZyYcvzoY0lgMMnoTjXppwFe_xDjbPig',
-  {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false
-    }
-  })  
-`

@@ -2,13 +2,10 @@ import { useEffect, useState, useRef } from 'react'
 import { WebContainer } from '@webcontainer/api'
 import ANSIToHTML from 'ansi-to-html'
 import { LinkData } from '@/types'
-import {
-  CODE_EDITOR_DEFAULT,
-  HELPERS_CONTENT,
-  PACKAGE_JSON_CONTENT,
-  SUPABASE_CONTENT
-} from '@/constants'
+import { CODE_EDITOR_DEFAULT, HELPERS_CONTENT, PACKAGE_JSON_CONTENT } from '@/constants'
 import { getIndexContent } from '@/helpers/getIndexContent'
+import { getSupabaseFileContent } from '@/helpers/webcontainer'
+import { useCredentials } from '@/context/CredentialsProvider'
 
 const ansiConverter = new ANSIToHTML()
 
@@ -19,6 +16,7 @@ export function useWebContainer() {
     src: ''
   })
   const webContainerInstanceRef = useRef<WebContainer | null>(null)
+  const { credentials } = useCredentials()
 
   useEffect(() => {
     const bootWebContainer = async () => {
@@ -40,7 +38,7 @@ export function useWebContainer() {
         },
         'supabase.js': {
           file: {
-            contents: SUPABASE_CONTENT
+            contents: getSupabaseFileContent({ ...credentials })
           }
         },
         'package.json': {

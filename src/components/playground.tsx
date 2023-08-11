@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { CODE_EDITOR_DEFAULT } from '@/constants'
 import { Credentials } from '@/types'
 import { getIndexContent } from '@/helpers/getIndexContent'
+import { getSupabaseFileContent } from '@/helpers/webcontainer'
 import { useWebContainer } from '@/hooks/useWebContainer'
 import { useCredentials } from '@/context/CredentialsProvider'
 import { SupaEditor } from '@/components/supa-editor'
@@ -53,8 +54,12 @@ export function Playground() {
             }
           >
             <FormCredentials
-              onSubmit={(credentials: Credentials) => {
+              onSubmit={async (credentials: Credentials) => {
                 setCredentials(credentials)
+                await webContainerInstanceRef.current?.fs.writeFile(
+                  '/supabase.js',
+                  getSupabaseFileContent({ ...credentials })
+                )
               }}
             />
           </Dialog>
