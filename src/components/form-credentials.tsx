@@ -6,20 +6,26 @@ import { CheckIc } from '@/components/icons'
 type FormCredentialsProps = {
   onSubmit: (credentials: Credentials) => void
 }
-
+const initialState = {
+  urlProject: '',
+  serviceKey: ''
+}
 export function FormCredentials({ onSubmit }: FormCredentialsProps) {
   const [isSaved, setIsSaved] = useState(false)
+  const [inputValues, setInputValues] = useState<Credentials>(() => {
+    const credentials = localStorage.getItem('supaplay-keys')
+    if (credentials) {
+      const credentialsStorage = JSON.parse(credentials)
+      return credentialsStorage
+    }
+    return initialState
+  })
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const formData = Object.fromEntries(new FormData(e.currentTarget))
-    const { projecturl, servicekey } = formData
-    const urlProject = projecturl as string
-    const serviceKey = servicekey as string
+    const { urlProject, serviceKey } = inputValues
     const data = { urlProject, serviceKey }
-    if (!isFormValid(data)) {
-      return
-    }
+    if (!isFormValid(data)) return
     setIsSaved(true)
     onSubmit(data)
   }
@@ -34,6 +40,13 @@ export function FormCredentials({ onSubmit }: FormCredentialsProps) {
           type='text'
           name='projecturl'
           placeholder='https://your-project.supabase.co'
+          value={inputValues.urlProject}
+          onChange={(e) => {
+            setInputValues({
+              ...inputValues,
+              urlProject: e.target.value
+            })
+          }}
           className='w-full px-4 py-2 bg-black/30 text-white text-sm sm:text-base placeholder-white/30 rounded-md focus:ring-2 focus:ring-green-400/80 focus:outline-none'
         />
       </div>
@@ -45,6 +58,13 @@ export function FormCredentials({ onSubmit }: FormCredentialsProps) {
           type='password'
           name='servicekey'
           placeholder='Your service key'
+          value={inputValues.serviceKey}
+          onChange={(e) => {
+            setInputValues({
+              ...inputValues,
+              serviceKey: e.target.value
+            })
+          }}
           className='w-full px-4 py-2 bg-black/30 text-white text-sm sm:text-base placeholder-white/30 rounded-md focus:ring-2 focus:ring-green-400/80 focus:outline-none'
         />
       </div>
