@@ -25,19 +25,7 @@ export const getMainIFrameContent = (defaultTable: DefaultTable | undefined) => 
 
   return `<main style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
   <div style="font-family: sans-serif; height:100%; width:100%;">
-    <div style="display: flex; flex-direction: column; margin-bottom: 32px;">
-      <h1 style="color: rgb(74 222 128);font-size: 2.25rem;line-height: 2.5rem;margin: 0;margin-bottom: 16px;">
-        SupaPlay
-      </h1>
-      <p style="color: rgba(255, 255, 255, 0.6);font-size: 1rem;line-height: 1.75rem;margin: 0;">
-        A playground to test and refine your <b>supabase-js</b> JavaScript functions against your
-        PostgreSQL database.
-      </p>
-      <p style="color: rgba(255, 255, 255, 0.6);font-size: 1rem;line-height: 1.75rem;margin: 0;">
-        Say goodbye to installations, and start testing your code instantly.
-      </p>
-    </div>
-    <div style="display: flex; flex-direction: column; margin-bottom: 32px;">
+    <div style="display: flex; flex-direction: column; margin-bottom: 20px;">
       <h2 style="color: rgb(74 222 128);font-size: 1.5rem;line-height: 2rem;margin: 0;margin-bottom: 16px;">
         Usage
       </h2>
@@ -50,7 +38,7 @@ export const getMainIFrameContent = (defaultTable: DefaultTable | undefined) => 
         You only need to return a promise as you will see in the examples section.
       </p>
     </div>
-    <div style="display: flex; flex-direction: column;">
+    <div style="display: flex; flex-direction: column;margin-bottom: 20px;">
       <h2 style="color: rgb(74 222 128);font-size: 1.5rem;line-height: 2rem;margin: 0;margin-bottom: 16px;">
         Examples
       </h2>
@@ -86,6 +74,14 @@ export const getMainIFrameContent = (defaultTable: DefaultTable | undefined) => 
           >return await supabase.from("${tableName}").select().gte("${randomColumn}", "value")
         </code>
       </div>
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <h2 style="color: rgb(74 222 128);font-size: 1.5rem;line-height: 2rem;margin: 0;margin-bottom: 16px;">
+        Settings
+      </h2>
+      <p style="color: rgba(255, 255, 255, 0.6);font-size: 1rem;line-height: 1.75rem;margin: 0;">
+        You can update your credentials at any time by clicking on the Settings button.
+      </p>
     </div>
   </div></main>`
 }
