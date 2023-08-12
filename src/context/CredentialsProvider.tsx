@@ -37,6 +37,13 @@ export function CredentialsProvider({ children }: CredentialsProviderProps) {
   const [location, setLocation] = useLocation()
 
   useEffect(() => {
+    const { serviceKey, urlProject } = credentials
+    const hasCredentials = serviceKey !== '' && urlProject !== ''
+
+    if (!hasCredentials) {
+      return
+    }
+
     const getSchema = async () => {
       const data = await getSchemaDatabase({ ...credentials })
       if (data) {
@@ -53,6 +60,7 @@ export function CredentialsProvider({ children }: CredentialsProviderProps) {
         localStorage.setItem('supaplay-table', JSON.stringify(defaultTable))
       }
     }
+
     getSchema()
   }, [credentials])
 
