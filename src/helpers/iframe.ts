@@ -68,7 +68,7 @@ export const getMainIFrameContent = (defaultTable: DefaultTable | undefined) => 
       </div>
       <div style="display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px;">
         <p style="color: rgba(255, 255, 255, 0.6);font-size: 1rem;margin: 0;margin-bottom: 10px;">
-          Match only rows where <b>id</b> is greater than or equal to value <b>2</b>:
+          Match only rows where <b>${randomColumn}</b> is greater than or equal to value:
         </p>
         <code style="background-color: rgba(0, 0, 0, 0.2);color: rgba(255, 255, 255, 0.5);font-size: 1rem;border: 1px solid rgba(255, 255, 255, 0.1);border-radius: 6px;padding: 10px;margin: 0;height: 100%;"
           >return await supabase.from("${tableName}").select().gte("${randomColumn}", "value")
