@@ -6,7 +6,7 @@ import { useWebContainer } from '@/hooks/useWebContainer'
 import { useCredentials } from '@/context/CredentialsProvider'
 import { SupaEditor } from '@/components/supa-editor'
 import { Header } from '@/components/header'
-import { GearIc, Play } from '@/components/icons'
+import { GearIc, PlayIc } from '@/components/icons'
 import { Terminal } from '@/components/terminal'
 import { Preview } from '@/components/preview'
 import { Placeholder } from '@/components/placeholder'
@@ -82,7 +82,7 @@ export function Playground() {
               </>
             ) : (
               <>
-                <Play className='w-4 h-4' />
+                <PlayIc className='w-4 h-4' />
                 Run Code
               </>
             )}
