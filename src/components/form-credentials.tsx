@@ -1,11 +1,15 @@
+import { useState } from 'react'
 import { Credentials } from '@/types'
 import { isFormValid } from '@/helpers/validateForm'
+import { CheckIc } from '@/components/icons'
 
 type FormCredentialsProps = {
   onSubmit: (credentials: Credentials) => void
 }
 
 export function FormCredentials({ onSubmit }: FormCredentialsProps) {
+  const [isSaved, setIsSaved] = useState(false)
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formData = Object.fromEntries(new FormData(e.currentTarget))
@@ -16,6 +20,7 @@ export function FormCredentials({ onSubmit }: FormCredentialsProps) {
     if (!isFormValid(data)) {
       return
     }
+    setIsSaved(true)
     onSubmit(data)
   }
 
@@ -48,7 +53,14 @@ export function FormCredentials({ onSubmit }: FormCredentialsProps) {
           type='submit'
           className='gap-1.5 px-4 py-1.5 rounded-md bg-green-400/80 hover:bg-green-600 transition-colors ease-in-out text-sm text-white focus:ring-2 focus:ring-green-400/80 focus:outline-none'
         >
-          Enter
+          {isSaved ? (
+            <span className='flex gap-1 items-center'>
+              <CheckIc className='w-4 h-4' />
+              Saved
+            </span>
+          ) : (
+            'Enter'
+          )}
         </button>
       </div>
     </form>
