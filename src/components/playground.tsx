@@ -70,7 +70,7 @@ export function Playground() {
           </Dialog>
           <button
             type='button'
-            disabled={loadingWebContainer.isRequesting}
+            disabled={loadingWebContainer.isRequesting || loadingWebContainer.isBooting}
             onClick={handleEvaluateTheCode}
             className='flex items-center gap-1.5 p-1.5 rounded-md bg-green-500/80 hover:bg-green-700 transition-colors ease-in-out 
             text-sm text-white disabled:cursor-not-allowed disabled:bg-green-500 font-medium border border-green-500'
