@@ -51,7 +51,7 @@ export function Playground() {
               <button
                 type='button'
                 className='flex items-center gap-1.5 p-1.5 rounded-md bg-neutral-700/50 hover:bg-neutral-700/70 transition-colors ease-in-out 
-            text-sm text-white border border-neutral-700 hover:border-neutral-500'
+            text-sm text-white border border-neutral-700 hover:border-neutral-500 font-medium'
               >
                 <GearIc className='w-4 h-4' />
                 Settings
@@ -72,8 +72,8 @@ export function Playground() {
             type='button'
             disabled={loadingWebContainer.isRequesting}
             onClick={handleEvaluateTheCode}
-            className='flex items-center gap-1.5 p-1.5 rounded-md bg-green-400/80 hover:bg-green-600 transition-colors ease-in-out 
-            text-sm text-white disabled:cursor-not-allowed disabled:bg-green-600'
+            className='flex items-center gap-1.5 p-1.5 rounded-md bg-green-500/80 hover:bg-green-700 transition-colors ease-in-out 
+            text-sm text-white disabled:cursor-not-allowed disabled:bg-green-500 font-medium border border-green-500'
           >
             {loadingWebContainer.isRequesting ? (
               <>
