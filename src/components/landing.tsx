@@ -7,7 +7,7 @@ export function Landing() {
     <>
       <header className='sticky top-0 px-5 md:px-20 backdrop-blur-md border-b border-gray-700 z-20'>
         <div className='flex h-16 items-center justify-between'>
-          <span className='text-lg sm:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#a5e29c] to-[#63cd77] font-medium'>
+          <span className='text-lg sm:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#a5e29c] to-[#63cd77] font-medium font-satoshiMedium'>
             supaplay
           </span>
           <a
@@ -15,7 +15,7 @@ export function Landing() {
             aria-label='Go to Repository'
             target='_blank'
             rel='noreferrer'
-            className='rounded-md px-6 py-2 text-white font-medium border border-white/10 bg-black/20 hover:bg-black/30 hover:border-white/40 transition-colors ease-out'
+            className='rounded-md px-6 py-2 text-white font-medium font-satoshiMedium border border-white/10 bg-black/20 hover:bg-black/30 hover:border-white/40 transition-colors ease-out'
           >
             ⭐️ Star on GitHub
           </a>
@@ -23,22 +23,22 @@ export function Landing() {
       </header>
       <main>
         <section className='mt-20 px-6 text-center mb-24'>
-          <h1 className='mx-auto max-w-md sm:max-w-4xl mt-5 font-bold text-white text-4xl sm:text-6xl'>
+          <h1 className='mx-auto max-w-md sm:max-w-4xl mt-5 font-bold text-white text-4xl sm:text-6xl font-satoshiBold'>
             <span className='text-transparent bg-clip-text bg-gradient-to-r from-[#a5e29c] to-[#63cd77]'>
               Instant
             </span>{' '}
             Supabase Query Playground
           </h1>
-          <p className='mx-auto max-w-md sm:max-w-2xl mt-8 text-white/70 text-base sm:text-2xl'>
+          <p className='mx-auto max-w-md sm:max-w-2xl mt-8 text-white/70 text-base sm:text-2xl font-satoshi'>
             Effortlessly test and refine your{' '}
-            <span className='text-transparent bg-clip-text bg-gradient-to-r from-[#a5e29c] to-[#63cd77] font-medium'>
+            <span className='text-transparent bg-clip-text bg-gradient-to-r from-[#a5e29c] to-[#63cd77] font-medium font-satoshiMedium'>
               supabase-js
             </span>{' '}
             JavaScript functions against your PostgreSQL.
           </p>
           <div className='mx-auto mt-10'>
             <Link
-              className='py-2.5 px-5 bg-green-500/80 hover:bg-green-700 transition-colors ease-in-out text-base sm:text-lg font-medium text-white shadow-lg rounded-md border border-green-500'
+              className='py-2.5 px-5 bg-green-500/80 hover:bg-green-700 transition-colors ease-in-out text-base sm:text-lg font-medium text-white shadow-lg rounded-md border border-green-500 font-satoshi'
               href='/play'
             >
               Get Started
@@ -73,7 +73,7 @@ export function Landing() {
         </section>
         <section className='mt-16 px-6'>
           <div className='mx-auto max-w-md sm:max-w-7xl'>
-            <h2 className='text-center text-white sm:text-3xl text-lg font-medium mb-16'>
+            <h2 className='text-center text-white sm:text-3xl text-lg font-medium font-satoshiMedium mb-16'>
               Explore Key Features
             </h2>
             <ListFeatures />
@@ -82,7 +82,7 @@ export function Landing() {
       </main>
       <footer className='w-full border-t border-white/10 mt-16'>
         <div className='mx-auto sm:max-w-7xl flex items-center justify-between py-5 px-6 sm:px-0'>
-          <span className='text-white/80 text-base sm:text-lg'>
+          <span className='text-white/80 text-base sm:text-lg font-satoshi'>
             Built with 💚 by
             <a
               href='https://twitter.com/xavimonp'

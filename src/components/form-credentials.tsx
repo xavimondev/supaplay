@@ -31,7 +31,7 @@ export function FormCredentials({ onSubmit }: FormCredentialsProps) {
   }
 
   return (
-    <form className='flex flex-col gap-5' onSubmit={handleSubmit}>
+    <form className='flex flex-col gap-5 font-satoshiMedium' onSubmit={handleSubmit}>
       <div className='w-full flex flex-col gap-1.5'>
         <label htmlFor='projecturl' className='text-white text-sm font-medium uppercase'>
           Url

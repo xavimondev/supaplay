@@ -33,13 +33,14 @@ function Feature({ title, description }: FeatureProps) {
         bg-gradient-to-r 
         from-[#a5e29c] 
         to-[#63cd77] 
-        font-semibold 
+        font-bold
+        font-satoshiBold 
         text-base 
         sm:text-2xl'
       >
         {title}
       </h3>
-      <p className='text-white/80 text-sm sm:text-lg'>{description}</p>
+      <p className='text-white/80 text-sm sm:text-lg font-satoshi'>{description}</p>
     </div>
   )
 }

@@ -22,7 +22,7 @@ export const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>
           ref={forwardRef}
           className='data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] h-[312px] w-[25vw] max-w-[850px] translate-x-[-50%] translate-y-[-50%] rounded-md bg-neutral-900 p-[25px] focus:outline-none overflow-scroll'
         >
-          <DialogPrimitive.Title className='text-white m-0 text-lg font-medium mb-5'>
+          <DialogPrimitive.Title className='text-white m-0 text-lg font-medium mb-5 font-satoshiMedium'>
             {title}
           </DialogPrimitive.Title>
           {description && (
