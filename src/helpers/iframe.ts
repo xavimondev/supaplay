@@ -7,7 +7,13 @@ export const removeBreaklineAndSpace = (text: string) => {
   return text.replace(regex, '')
 }
 
-export const getMainIFrameContent = (defaultTable: DefaultTable | undefined) => {
+export const getMainIFrameContent = ({
+  defaultTable,
+  hasCredentials
+}: {
+  defaultTable: DefaultTable | undefined
+  hasCredentials: boolean
+}) => {
   let tableName = 'YOUR_TABLE'
   let exampleInsert: Record<string, any> = { id: 1 }
   let randomColumn = 'id'
@@ -15,7 +21,7 @@ export const getMainIFrameContent = (defaultTable: DefaultTable | undefined) => 
   if (defaultTable) {
     tableName = defaultTable.table
     exampleInsert = defaultTable?.properties
-      .slice(0, 3)
+      .slice(0, 2)
       .reduce((acum: Record<string, any>, property) => {
         acum[property] = 'data'
         return acum
@@ -25,6 +31,19 @@ export const getMainIFrameContent = (defaultTable: DefaultTable | undefined) => 
 
   return `<main style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
   <div style="font-family: sans-serif; height:100%; width:100%;">
+    <div style="display: flex; flex-direction: column;margin-bottom: 20px;">
+      <h2 style="color: rgb(74 222 128);font-size: 1.5rem;line-height: 2rem;margin: 0;margin-bottom: 16px;">
+        Settings
+      </h2>
+      ${
+        !hasCredentials
+          ? '<p style="color: rgba(255, 255, 255, 0.6);font-size: 1rem;line-height: 1.75rem;margin: 0;">Start setting your Supabase API Keys on &#9881</span> Settings.</p>'
+          : ''
+      }
+      <p style="color: rgba(255, 255, 255, 0.6);font-size: 1rem;line-height: 1.75rem;margin: 0;">
+        You can update your credentials at any time by clicking on the Settings button.
+      </p>
+    </div>
     <div style="display: flex; flex-direction: column; margin-bottom: 20px;">
       <h2 style="color: rgb(74 222 128);font-size: 1.5rem;line-height: 2rem;margin: 0;margin-bottom: 16px;">
         Usage
@@ -74,14 +93,6 @@ export const getMainIFrameContent = (defaultTable: DefaultTable | undefined) => 
           >return await supabase.from("${tableName}").select().gte("${randomColumn}", "value")
         </code>
       </div>
-    </div>
-    <div style="display: flex; flex-direction: column;">
-      <h2 style="color: rgb(74 222 128);font-size: 1.5rem;line-height: 2rem;margin: 0;margin-bottom: 16px;">
-        Settings
-      </h2>
-      <p style="color: rgba(255, 255, 255, 0.6);font-size: 1rem;line-height: 1.75rem;margin: 0;">
-        You can update your credentials at any time by clicking on the Settings button.
-      </p>
     </div>
   </div></main>`
 }

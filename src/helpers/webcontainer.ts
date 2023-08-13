@@ -1,10 +1,9 @@
-export const getSupabaseFileContent = ({
-  urlProject,
-  serviceKey
-}: {
-  urlProject: string
-  serviceKey: string
-}) => {
+import { Credentials } from '@/types'
+
+export const getSupabaseFileContent = (credentials: Credentials | undefined) => {
+  if (!credentials) return 'export const supabase = undefined'
+
+  const { serviceKey, urlProject } = credentials
   return `
   import { createClient } from '@supabase/supabase-js'
   export const supabase = createClient('${urlProject}','${serviceKey}',
@@ -57,7 +56,7 @@ export const getIndexFileContent = ({ mainIndexContent }: { mainIndexContent: st
   })
 
   app.listen(port, () => {
-    console.log(\`App is live at http://localhost:\${port}\`)
+    //console.log(\`App is live at http://localhost:\${port}\`)
   })
 `
 }

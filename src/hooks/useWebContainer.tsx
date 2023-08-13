@@ -29,7 +29,12 @@ export function useWebContainer() {
         webContainerInstanceRef.current = await WebContainer.boot()
       }
 
-      const mainIndexContent = removeBreaklineAndSpace(getMainIFrameContent(defaultTable))
+      const { serviceKey, urlProject } = credentials
+      const hasCredentials = serviceKey !== '' && urlProject !== ''
+      const supabaseKeys = !hasCredentials ? undefined : credentials
+      const mainIndexContent = removeBreaklineAndSpace(
+        getMainIFrameContent({ defaultTable, hasCredentials })
+      )
       // mounting tree of files into filesystem
       await webContainerInstanceRef.current.mount({
         'index.js': {
@@ -46,7 +51,7 @@ export function useWebContainer() {
         },
         'supabase.js': {
           file: {
-            contents: getSupabaseFileContent({ ...credentials })
+            contents: getSupabaseFileContent(supabaseKeys)
           }
         },
         'services.js': {
