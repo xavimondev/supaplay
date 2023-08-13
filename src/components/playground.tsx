@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { Link } from 'wouter'
 import { CODE_EDITOR_DEFAULT } from '@/constants'
 import { Credentials } from '@/types'
 import { getServicesFileContent, getSupabaseFileContent } from '@/helpers/webcontainer'
@@ -44,7 +45,7 @@ export function Playground() {
   return (
     <div className='w-full flex flex-col min-h-screen'>
       <Header>
-        <a
+        <Link
           href='/'
           className='
                       text-lg 
@@ -58,7 +59,7 @@ export function Playground() {
                       font-satoshi-medium'
         >
           supaplay
-        </a>
+        </Link>
         <div className='flex gap-2'>
           <Dialog
             title='Setting Up Credentiales'
