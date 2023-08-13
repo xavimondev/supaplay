@@ -1,5 +1,4 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react'
-import { useLocation } from 'wouter'
 import { Credentials, DefaultTable } from '@/types'
 import { getRandomElementArray } from '@/helpers/getRandomElement'
 import { getSchemaDatabase } from '@/services/getSchemaDatabase'
@@ -34,7 +33,6 @@ export function CredentialsProvider({ children }: CredentialsProviderProps) {
     const storedCredentials = localStorage.getItem('supaplay-keys')
     return storedCredentials ? JSON.parse(storedCredentials) : initialState
   })
-  const [location, setLocation] = useLocation()
 
   useEffect(() => {
     const { serviceKey, urlProject } = credentials
@@ -63,18 +61,6 @@ export function CredentialsProvider({ children }: CredentialsProviderProps) {
 
     getSchema()
   }, [credentials])
-
-  useEffect(() => {
-    const { serviceKey, urlProject } = credentials
-    const hasCredentials = serviceKey !== '' && urlProject !== ''
-
-    if (!hasCredentials) {
-      setLocation('/signin')
-      return
-    }
-
-    if (location === '/signin' && hasCredentials) setLocation('/play')
-  }, [])
 
   return (
     <CredentialsContext.Provider
