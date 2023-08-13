@@ -44,7 +44,7 @@ export function Landing() {
               Get Started
             </Link>
           </div>
-          <div className='mx-auto max-w-7xl mt-28 relative flex justify-center'>
+          <div className='mx-auto max-w-7xl mt-24 relative flex justify-center'>
             <div className='relative group'>
               <div
                 className='
