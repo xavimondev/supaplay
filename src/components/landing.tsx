@@ -1,3 +1,4 @@
+import { Link } from 'wouter'
 import imgProduct from '@/images/supaplay.jpg'
 import { ListFeatures } from '@/components/list-features'
 
@@ -36,12 +37,12 @@ export function Landing() {
             JavaScript functions against your PostgreSQL.
           </p>
           <div className='mx-auto mt-10'>
-            <a
-              className='py-2.5 px-5 bg-green-500/80 hover:bg-green-700 transition-colors ease-in-out text-base font-medium text-white shadow-lg rounded-md border border-green-500'
-              href='/sigin'
+            <Link
+              className='py-2.5 px-5 bg-green-500/80 hover:bg-green-700 transition-colors ease-in-out text-base sm:text-lg font-medium text-white shadow-lg rounded-md border border-green-500'
+              href='/play'
             >
               Get Started
-            </a>
+            </Link>
           </div>
           <div className='mx-auto max-w-7xl mt-28 relative flex justify-center'>
             <div className='relative group'>
