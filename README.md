@@ -2,16 +2,6 @@
    <a href="https://supaplay.vercel.app/" target="_blank">
       <img src="./public/img/banner.jpg" width="100%"/>
    </a>
-
-   <a href="#-introduction">Introduction</a>
-   <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-   <a href="#-featurs">Features</a>
-   <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-   <a href="#-stack">Stack</a>
-   <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-   <a href="#-development">Development</a>
-   <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-   <a href="#-contributing">Contributing</a>
 </div>
 
 ## Introduction
