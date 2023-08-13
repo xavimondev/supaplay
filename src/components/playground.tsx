@@ -22,7 +22,9 @@ export function Playground() {
     isRequesting: false
   })
   const { linkData, output, webContainerInstanceRef } = useWebContainer()
-  const { setCredentials } = useCredentials()
+  const { credentials, setCredentials } = useCredentials()
+  const { serviceKey, urlProject } = credentials
+  const hasCredentials = serviceKey !== '' && urlProject !== ''
 
   const setCode = (code: string) => {
     codeValueRef.current = code
@@ -66,8 +68,9 @@ export function Playground() {
             btnOpen={
               <button
                 type='button'
+                disabled={loadingWebContainer.isRequesting || loadingWebContainer.isBooting}
                 className='flex items-center gap-1.5 p-1.5 rounded-md bg-neutral-700/50 hover:bg-neutral-700/70 transition-colors ease-in-out 
-            text-sm text-white border border-neutral-700 hover:border-neutral-500 font-medium'
+            text-sm text-white border border-neutral-700 hover:border-neutral-500 font-medium disabled:cursor-not-allowed disabled:bg-neutral-500'
               >
                 <GearIc className='w-4 h-4' />
                 Settings
@@ -86,7 +89,9 @@ export function Playground() {
           </Dialog>
           <button
             type='button'
-            disabled={loadingWebContainer.isRequesting || loadingWebContainer.isBooting}
+            disabled={
+              !hasCredentials || loadingWebContainer.isBooting || loadingWebContainer.isRequesting
+            }
             onClick={handleEvaluateTheCode}
             className='flex items-center gap-1.5 p-1.5 rounded-md bg-green-500/80 hover:bg-green-700 transition-colors ease-in-out 
             text-sm text-white disabled:cursor-not-allowed disabled:bg-green-500 font-medium border border-green-500'
