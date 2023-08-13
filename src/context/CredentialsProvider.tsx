@@ -69,11 +69,11 @@ export function CredentialsProvider({ children }: CredentialsProviderProps) {
     const hasCredentials = serviceKey !== '' && urlProject !== ''
 
     if (!hasCredentials) {
-      setLocation('/')
+      setLocation('/signin')
       return
     }
 
-    if (location === '/' && hasCredentials) setLocation('/play')
+    if (location === '/signin' && hasCredentials) setLocation('/play')
   }, [])
 
   return (
