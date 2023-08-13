@@ -44,6 +44,21 @@ export function Playground() {
   return (
     <div className='w-full flex flex-col min-h-screen'>
       <Header>
+        <a
+          href='/'
+          className='
+                      text-lg 
+                      sm:text-2xl 
+                      text-transparent 
+                      bg-clip-text 
+                      bg-gradient-to-r 
+                      from-[#a5e29c] 
+                      to-[#63cd77] 
+                      font-medium 
+                      font-satoshi-medium'
+        >
+          supaplay
+        </a>
         <div className='flex gap-2'>
           <Dialog
             title='Setting Up Credentiales'
