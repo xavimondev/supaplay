@@ -1,5 +1,6 @@
 import Editor, { type Monaco } from '@monaco-editor/react'
 import { constrainedEditor } from 'constrained-editor-plugin'
+import { Placeholder } from '@/components/placeholder'
 
 type SupaEditorProps = {
   defaultCode: string
@@ -50,7 +51,7 @@ export function SupaEditor({ defaultCode, onChangeCode }: SupaEditorProps) {
       defaultLanguage='typescript'
       defaultValue={defaultCode}
       theme='vs-dark'
-      loading={<span className='text-white'>Loading editor...</span>}
+      loading={<Placeholder msg='Loading Editor' />}
       onMount={handleEditorDidMount}
     />
   )
