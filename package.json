@@ -12,6 +12,7 @@
   "dependencies": {
     "@monaco-editor/react": "4.5.1",
     "@radix-ui/react-dialog": "1.0.4",
+    "@vercel/analytics": "1.0.2",
     "@webcontainer/api": "1.1.5",
     "ansi-to-html": "0.7.2",
     "constrained-editor-plugin": "1.3.0",
