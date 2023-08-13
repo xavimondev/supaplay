@@ -9,7 +9,7 @@ export function Credentials() {
 
   return (
     <div className='min-h-screen flex justify-center items-center'>
-      <div className='flex flex-col rounded-md border border-white/10 shadow p-5 mx-3 sm:m-0 w-full sm:w-[550px] selection:bg-green-400 selection:text-black'>
+      <div className='flex flex-col rounded-md border border-white/10 shadow p-5 mx-3 sm:m-0 w-full sm:w-[550px]'>
         <div className='flex flex-col gap-4'>
           <h1 className='font-medium text-white text-xl sm:text-2xl'>Steps</h1>
           <ol className='text-white/70 list-decimal list-inside space-y-2 font-medium text-sm sm:text-base'>
