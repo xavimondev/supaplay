@@ -15,7 +15,7 @@ export function Landing() {
             aria-label='Go to Repository'
             target='_blank'
             rel='noreferrer'
-            className='rounded-md px-6 py-2 text-white font-medium font-satoshiMedium border border-white/10 bg-black/20 hover:bg-black/30 hover:border-white/40 transition-colors ease-out'
+            className='text-sm sm:text-base rounded-md px-6 py-2 text-white font-medium font-satoshiMedium border border-white/10 bg-black/20 hover:bg-black/30 hover:border-white/40 transition-colors ease-out'
           >
             ⭐️ Star on GitHub
           </a>
@@ -29,7 +29,7 @@ export function Landing() {
             </span>{' '}
             Supabase Query Playground
           </h1>
-          <p className='mx-auto max-w-md sm:max-w-2xl mt-8 text-white/70 text-base sm:text-2xl font-satoshi'>
+          <p className='mx-auto max-w-md sm:max-w-2xl mt-8 text-white/70 text-lg sm:text-2xl font-satoshi'>
             Effortlessly test and refine your{' '}
             <span className='text-transparent bg-clip-text bg-gradient-to-r from-[#a5e29c] to-[#63cd77] font-medium font-satoshiMedium'>
               supabase-js

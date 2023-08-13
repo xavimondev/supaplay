@@ -35,12 +35,12 @@ function Feature({ title, description }: FeatureProps) {
         to-[#63cd77] 
         font-bold
         font-satoshiBold 
-        text-base 
+        text-lg 
         sm:text-2xl'
       >
         {title}
       </h3>
-      <p className='text-white/80 text-sm sm:text-lg font-satoshi'>{description}</p>
+      <p className='text-white/80 text-base sm:text-lg font-satoshi'>{description}</p>
     </div>
   )
 }
