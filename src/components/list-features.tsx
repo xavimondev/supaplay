@@ -48,7 +48,7 @@ export function ListFeatures() {
   return (
     <div className='w-full flex flex-col sm:flex-row gap-4'>
       {APP_KEY_FEATURES.map(({ title, description }) => (
-        <Feature title={title} description={description} />
+        <Feature key={title} title={title} description={description} />
       ))}
     </div>
   )
