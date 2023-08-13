@@ -31,7 +31,15 @@ export const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>
             </DialogPrimitive.Description>
           )}
           {children}
-          {btnClose && <DialogPrimitive.Close asChild>{}</DialogPrimitive.Close>}
+          {btnClose && <DialogPrimitive.Close asChild>{btnClose}</DialogPrimitive.Close>}
+          <DialogPrimitive.Close asChild>
+            <button
+              className='text-gray-300 hover:bg-black/30 focus:shadow-slate-200 absolute top-[14px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none'
+              aria-label='Close'
+            >
+              x
+            </button>
+          </DialogPrimitive.Close>
         </DialogPrimitive.Content>
       </DialogPrimitive.Portal>
     </DialogPrimitive.Root>
