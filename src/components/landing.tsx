@@ -7,9 +7,12 @@ export function Landing() {
     <>
       <header className='sticky top-0 px-5 md:px-20 backdrop-blur-md border-b border-gray-700 z-20'>
         <div className='flex h-16 items-center justify-between'>
-          <span className='text-lg sm:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#a5e29c] to-[#63cd77] font-medium font-satoshiMedium'>
+          <Link
+            href='/'
+            className='text-lg sm:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#a5e29c] to-[#63cd77] font-medium font-satoshiMedium'
+          >
             supaplay
-          </span>
+          </Link>
           <a
             href='https://github.com/xavimondev/supaplay'
             aria-label='Go to Repository'
