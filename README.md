@@ -9,6 +9,10 @@
 Supaplay is a playground to effortlessly test and refine your `supabase-js` JavaScript functions against your PostgreSQL thanks to the power
 of WebContainer API.
 
+## Video demo
+
+[Go to video](https://drive.google.com/file/d/1LGrV9CETt-aLTiWxoO4JJ6lKLM48S9mp/view)
+
 ## Features
 
 ### Zero Setup
