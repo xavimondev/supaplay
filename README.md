@@ -11,7 +11,7 @@ of WebContainer API.
 
 ## Video demo
 
-[Go to video](https://drive.google.com/file/d/1LGrV9CETt-aLTiWxoO4JJ6lKLM48S9mp/view)
+[Watch video](https://drive.google.com/file/d/1LGrV9CETt-aLTiWxoO4JJ6lKLM48S9mp/view)
 
 ## Features
 
